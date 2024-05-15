@@ -1,5 +1,7 @@
 package org.example.lesson5.implementation;
 
+import java.util.Iterator;
+
 //интефейс ArrayList для хранения целых
 public interface MyList {
     int size();
@@ -9,4 +11,7 @@ public interface MyList {
     void add(int index, int value);
     void remove(int index);
     int get(int index);
+
+    Iterator<Integer> iterator();
+    Iterator<Integer> backward();
 }

@@ -1,5 +1,7 @@
 package org.example.lesson5.implementation;
 
+import java.util.Iterator;
+
 public class MyArrayList implements MyList {
     // количество элементов;
     private int size = 0;
@@ -75,7 +77,7 @@ public class MyArrayList implements MyList {
         if (size == data.length) {
             increaseCapacity();
         }
-        for (int i = size() - 1; i >= index ; i--)  {
+        for (int i = size() - 1; i >= index; i--) {
             data[i + 1] = data[i];
         }
 
@@ -95,12 +97,51 @@ public class MyArrayList implements MyList {
     }
 
 
-@Override
-public int get(int index) {
-    if (index < 0 || index >= size()) {
-        throw new IndexOutOfBoundsException();
+    @Override
+    public int get(int index) {
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        return data[index];
     }
-    return data[index];
-}
 
+    @Override
+    public Iterator<Integer> iterator() {
+        return new Iterator<Integer>() {
+            // индекс элемента из MyArrayList который мы обходим
+            private int position = -1;
+
+            @Override
+            public boolean hasNext() {
+                // увеличиваем позицию и проверяем что она внутри MyArrayList
+                return ++position < size();
+            }
+
+            @Override
+            public Integer next() {
+                // должна возвращать текущий элемент MyArrayList
+                return get(position);
+            }
+        };
+    }
+
+    @Override
+    public Iterator<Integer> backward() {
+        return new Iterator<Integer>() {
+            // индекс элемента из MyArrayList который мы обходим
+            private int position = size();
+
+            @Override
+            public boolean hasNext() {
+                // увеличиваем позицию и проверяем что она внутри MyArrayList
+                return --position >= 0;
+            }
+
+            @Override
+            public Integer next() {
+                // должна возвращать текущий элемент MyArrayList
+                return get(position);
+            }
+        };
+    }
 }
