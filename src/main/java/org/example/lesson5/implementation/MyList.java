@@ -3,7 +3,9 @@ package org.example.lesson5.implementation;
 import java.util.Iterator;
 
 //интефейс ArrayList для хранения целых
-public interface MyList {
+public interface MyList  extends Iterable<Integer>{
+
+//    https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html
     int size();
     boolean contains (int value);
     void set(int index, int value);

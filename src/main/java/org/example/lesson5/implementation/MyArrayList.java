@@ -1,6 +1,10 @@
 package org.example.lesson5.implementation;
 
+import org.example.lesson2.A;
+
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 public class MyArrayList implements MyList {
     // количество элементов;
@@ -122,6 +126,11 @@ public class MyArrayList implements MyList {
                 // должна возвращать текущий элемент MyArrayList
                 return get(position);
             }
+
+            @Override
+            public void remove() {
+                MyArrayList.this.remove(position--); //для ссылки на экземпляр класса, а не итератора
+            }
         };
     }
 
@@ -142,6 +151,98 @@ public class MyArrayList implements MyList {
                 // должна возвращать текущий элемент MyArrayList
                 return get(position);
             }
+        };
+    }
+
+    public void sort() {
+        int n = size();
+        boolean swapped;
+        for (int i = 0; i < n - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < n - i - 1; j++) {
+                if (data[j] > data[j + 1]) {
+                    // Обмен arr[j] и arr[j+1]
+                    int temp = data[j];
+                    data[j] = data[j + 1];
+                    data[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) break; // Если элементы уже отсортированы
+        }
+    }
+
+    public Iterator<Integer> sortedIterator() {
+        sort();
+        return new Iterator<Integer>() {
+            private int position = -1;
+
+            @Override
+            public boolean hasNext() {
+                // увеличиваем позицию и проверяем что она внутри MyArrayList
+                return ++position < size();
+            }
+
+            @Override
+            public Integer next() {
+                // должна возвращать текущий элемент MyArrayList
+                return get(position);
+            }
+        };
+    }
+
+    public ListIterator<Integer> listIterator() {
+        return new ListIterator<Integer>() {
+            // индекс элемента из MyArrayList который мы обходим
+            private int position = -1;
+
+            @Override
+            public boolean hasNext() {
+                // увеличиваем позицию и проверяем что она внутри MyArrayList
+                return ++position < size();
+            }
+
+            @Override
+            public Integer next() {
+                // должна возвращать текущий элемент MyArrayList
+                return get(position);
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                return --position >= 0;
+            }
+
+            @Override
+            public Integer previous() {
+                return get(position);
+            }
+
+            @Override
+            public int nextIndex() {
+                return position + 1;
+            }
+
+            @Override
+            public int previousIndex() {
+                return position - 1;
+            }
+
+            @Override
+            public void remove() {
+                MyArrayList.this.remove(position--);
+            }
+
+            @Override
+            public void set(Integer integer) {
+                MyArrayList.this.set(position, integer);
+            }
+
+            @Override
+            public void add(Integer integer) {
+                MyArrayList.this.add(integer);
+            }
+
         };
     }
 }

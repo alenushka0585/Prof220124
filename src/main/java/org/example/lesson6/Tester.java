@@ -45,8 +45,8 @@ public class Tester {
 
         Iterator<String> newCapitalsIterator = capitals.iterator();
 
-        while (newCapitalsIterator.hasNext()){
-            if (newCapitalsIterator.next().startsWith("B")){
+        while (newCapitalsIterator.hasNext()) {
+            if (newCapitalsIterator.next().startsWith("B")) {
                 newCapitalsIterator.remove();
             }
         }
@@ -68,7 +68,7 @@ public class Tester {
         //нет обращения по индексу
 
         Iterator<String> riversIterator = rivers.iterator();
-        while (riversIterator.hasNext()){
+        while (riversIterator.hasNext()) {
             System.out.println(riversIterator.next());
         }
 
@@ -78,13 +78,58 @@ public class Tester {
         myList.add(3);
 
         Iterator<Integer> myListIterator = myList.iterator();
-        while (myListIterator.hasNext()){
+        while (myListIterator.hasNext()) {
             System.out.println(myListIterator.next());
         }
 
         Iterator<Integer> myListBackwardIterator = myList.backward();
-        while (myListBackwardIterator.hasNext()){
+        while (myListBackwardIterator.hasNext()) {
             System.out.println(myListBackwardIterator.next());
+        }
+
+        Iterator<Integer> myListRemoveIterator = myList.iterator();
+
+        while (myListRemoveIterator.hasNext()) {
+            if (myListRemoveIterator.next() % 2 == 0) {
+                myListRemoveIterator.remove();
+            }
+        }
+
+        System.out.println(myList);
+
+
+
+        for(String c: capitals){
+            System.out.println("capital: " + c);
+        }
+// чтобы работал for each, нужно чтобы extendiл Iterable
+        for (Integer i: myList){
+            System.out.println("myList element: " + i);
+        }
+
+        List<String> names = new ArrayList<>(
+                List.of("Max", "Alina", "Alexander", "Sam")
+        );
+        ListIterator<String> namesIterator = names.listIterator();
+        namesIterator.hasNext();
+        System.out.println(namesIterator.next());
+        namesIterator.hasNext();
+        System.out.println(namesIterator.next());
+        namesIterator.hasPrevious();
+        System.out.println(namesIterator.previous());
+        namesIterator.hasPrevious();
+        System.out.println(namesIterator.previous());
+
+        ArrayIterator arrayIterator = new ArrayIterator(new int[]{1,2,3,4,5});
+
+        while (arrayIterator.hasNext()){
+            System.out.println("array element: " + arrayIterator.next());
+        }
+
+        StringIterator stringIterator = new StringIterator("hello");
+
+        while (stringIterator.hasNext()){
+            System.out.println("String Iterrator: " + stringIterator.next());
         }
 
     }
