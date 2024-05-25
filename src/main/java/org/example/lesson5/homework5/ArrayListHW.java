@@ -9,6 +9,10 @@ public class ArrayListHW {
         );
         System.out.println(evenList(list));
 
+        System.out.println(
+                List.of(1, 2, 3, 4).stream().filter(i -> i % 2 == 0).toList()
+        );
+
 
         List<Integer> list2 = new ArrayList<>(
                 Arrays.asList(1, 3, 4, 2)
@@ -47,9 +51,9 @@ public class ArrayListHW {
 //    Напишите функцию, возвращающую второй по величине элемент списка целых.
 //    Например, {1,3,4,2} -> 3
 
-    private static int secondOrdinalNum(List<Integer> list) {
-        if (list == null || list.isEmpty()) {
-            return 0;
+    private static Integer secondOrdinalNum(List<Integer> list) {
+        if (list == null || list.size() <= 1) {
+            return null;
         }
         list.sort(Comparator.reverseOrder());
         return list.get(1);
@@ -64,6 +68,22 @@ public class ArrayListHW {
         list.sort(Comparator.reverseOrder());
         return list;
     }
+
+    public static List<Integer> reverse(List<Integer> l) {
+        if (l == null) {
+            return null;
+        }
+        for (int i = 0; i < l.size() / 2; i++) {
+            Integer temp = l.get(i);
+            l.set(i, l.get(l.size() - 1 - i));
+            l.set(l.size() - 1 - i, temp);
+            // 0 <> size - 1
+            // 1 <> size - 1 - 1
+        }
+        return l;
+    }
+
+
 //** 4. Напишите функцию, удаляющие дубликаты из передаваемого в нее списка строк.
 //            Например {"Dima", "Sam", "Dima", "Alina"} -> {"Alina", "Dima", "Sam"}
 

@@ -26,7 +26,10 @@ public class Tester {
                         "Alan", "Cuba", "Finland", "Axelrod", "Avangard", "Cuba" )
         );
 
-        System.out.println(countriesFromTwoLists(countries, words));
+//        System.out.println(countriesFromTwoLists(countries, words));
+
+        countries.retainAll(words);
+        System.out.println(countries);
 
 
 //        Напишите метод, принимащий два массива целых и возвращающий список из

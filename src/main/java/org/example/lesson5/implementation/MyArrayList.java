@@ -173,20 +173,24 @@ public class MyArrayList implements MyList {
     }
 
     public Iterator<Integer> sortedIterator() {
-        sort();
+        int[] source = new int[size()];
+        System.arraycopy(data, 0, source, 0, size());
+        Arrays.sort(source);
+
         return new Iterator<Integer>() {
+
             private int position = -1;
 
             @Override
             public boolean hasNext() {
                 // увеличиваем позицию и проверяем что она внутри MyArrayList
-                return ++position < size();
+                return ++position < source.length;
             }
 
             @Override
             public Integer next() {
                 // должна возвращать текущий элемент MyArrayList
-                return get(position);
+                return source[position];
             }
         };
     }
