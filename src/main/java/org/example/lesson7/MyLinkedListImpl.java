@@ -171,22 +171,22 @@ public class MyLinkedListImpl implements MyLinkedList {
     @Override
     public Iterator<Integer> iterator() {
 
-        return new Iterator<Integer>() {
-            private int position = -1;
+        return new Iterator<>() {
+
+            Node node = head;
+
             @Override
             public boolean hasNext() {
-                return ++position < size();
+                return node != null;
             }
 
             @Override
             public Integer next() {
-                return get(position);
+                int result = node.getValue();
+                node = node.getNext();
+                return result;
             }
 
-            @Override
-            public void remove() {
-                MyLinkedListImpl.this.remove(position--);
-            }
         };
     }
 
@@ -196,8 +196,10 @@ public class MyLinkedListImpl implements MyLinkedList {
     }
 
     @Override
-    public void removeFirst() {
+    public int removeFirst() {
+        int result = get(0);
         remove(0);
+        return result;
     }
 
     @Override
@@ -211,8 +213,10 @@ public class MyLinkedListImpl implements MyLinkedList {
     }
 
     @Override
-    public void removeLast() {
+    public int removeLast() {
+        int result = get(size()-1);
         remove(size()-1);
+        return result;
     }
 
     @Override
