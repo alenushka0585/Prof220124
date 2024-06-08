@@ -67,7 +67,7 @@ List<String> list = new ArrayList<>(List.of("apple", "banana", "apple", "orange"
 
     public static List<List<String>> getWords(List<String> strings){
         if (strings == null || strings.isEmpty()) {
-            return new ArrayList<>(); // Возвращаем пустой список, если входной список пустой или null
+            return new ArrayList<>();
         }
         Map<Set, List<String>> map = new HashMap<>();
 
