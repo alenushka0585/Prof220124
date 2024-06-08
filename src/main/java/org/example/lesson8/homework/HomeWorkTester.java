@@ -1,8 +1,5 @@
 package org.example.lesson8.homework;
 
-import org.example.lesson8.WordCounter;
-
-import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 
 public class HomeWorkTester {
@@ -20,7 +17,7 @@ public class HomeWorkTester {
 //        Например: {-1, 12,3,4,-8,-2} -> {4, 12, 3, 8}
 
         Set<Integer> integerSet = new HashSet<>(
-                Arrays.asList(-1, 12,3,4,-8,-2)
+                Arrays.asList(-1, 12, 3, 4, -8, -2)
         );
 
         positiveSet(integerSet);
@@ -33,17 +30,17 @@ public class HomeWorkTester {
         String s2 = "один раз это один раз но только раз";
         System.out.println(ordinalOfWords(s2));
 
-        }
+    }
 
     private static Set<Word> ordinalOfWords(String s2) {
-        Set<Word>  words= new HashSet<>();
+        Set<Word> words = new LinkedHashSet<>();
         String[] arr = s2.split(" ");
 
         for (int i = 0; i < arr.length; i++) {
             Word w = new Word(arr[i]);
             words.add(w);
-            if(words.contains(w)){
-                w = findWord(words,w);
+            if (words.contains(w)) {
+                w = findWord(words, w);
                 w.index.add(i);
             }
         }
@@ -51,19 +48,19 @@ public class HomeWorkTester {
     }
 
     private static Word findWord(Set<Word> words, Word d) {
-        for(Word w: words) {
-            if(w.equals(d))
+        for (Word w : words) {
+            if (w.equals(d))
                 return w;
         }
         return null;
     }
 
-    private static class Word{
-        private String Word;
-        private List<Integer> index= new ArrayList<>();
+    private static class Word {
+        private String word;
+        private List<Integer> index = new ArrayList<>();
 
         public Word(String word) {
-            Word = word;
+            this.word = word;
         }
 
         @Override
@@ -71,33 +68,33 @@ public class HomeWorkTester {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Word word = (Word) o;
-            return Objects.equals(Word, word.Word);
+            return Objects.equals(this.word, word.word);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(Word);
+            return Objects.hash(word);
         }
 
         @Override
         public String toString() {
-            return "\"" + Word + "\":" +
-                      index;
+            return "\"" + word + "\":" +
+                    index;
         }
     }
 
     private static void positiveSet(Set<Integer> integerSet) {
-        for (Iterator<Integer> setIterator = integerSet.iterator(); setIterator.hasNext();){
+        for (Iterator<Integer> setIterator = integerSet.iterator(); setIterator.hasNext(); ) {
             int num = setIterator.next();
-            if (num <0){
+            if (num < 0) {
                 setIterator.remove();
             }
         }
     }
 
-    private static HashSet<Character> uniqueChars(String s) {
+    private static Set<Character> uniqueChars(String s) {
         HashSet<Character> result = new HashSet<>();
-        for (char c : s.toCharArray()){
+        for (char c : s.toCharArray()) {
             result.add(c);
         }
         return result;
