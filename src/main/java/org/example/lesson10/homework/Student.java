@@ -1,9 +1,9 @@
 package org.example.lesson10.homework;
 
 public class Student implements Comparable{
-    String name;
-    int age;
-    String major;
+    private String name;
+    private int age;
+    private String major;
 
     public Student(String name, int age, String major) {
         this.name = name;

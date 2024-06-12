@@ -78,7 +78,6 @@ public class StudentTester {
         }
         List<Student> list = new ArrayList<>(students);
         Collections.sort(list, comparator);
-        System.out.println("LIST");
         students.clear();
         students.addAll(list);
     }
