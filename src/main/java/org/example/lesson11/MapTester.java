@@ -1,6 +1,7 @@
 package org.example.lesson11;
 
 import java.util.*;
+import static java.util.AbstractMap.SimpleEntry;
 
 public class MapTester {
     /*
@@ -67,6 +68,14 @@ public class MapTester {
 
         String sentence = "hello how exactly was his eye";
         System.out.println(firstLetterToList(sentence));
+
+        AbstractMap.SimpleEntry<String, Integer> pair = new AbstractMap.SimpleEntry<>(
+                "Max", 123);
+
+        SimpleEntry<String, Integer> pair2 = new SimpleEntry<>(
+                "Max", 123); // если сделать статический импорт
+
+        System.out.println("pair: " + pair.getKey() + ":" + pair.getValue());
 
 
 

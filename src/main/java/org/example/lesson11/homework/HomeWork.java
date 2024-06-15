@@ -33,6 +33,9 @@ List<String> list = new ArrayList<>(List.of("apple", "banana", "apple", "orange"
 
     public static Map<String, Integer> makeMap(String[] strings, int[] ints) {
         Map<String, Integer> map = new LinkedHashMap<>();
+        if(strings == null || ints == null || strings.length != ints.length){
+            return map;
+        }
         for (int i = 0; i < strings.length; i++) {
             map.put(strings[i], ints[i]);
         }
@@ -62,6 +65,11 @@ List<String> list = new ArrayList<>(List.of("apple", "banana", "apple", "orange"
             }
         }
 
+//        TreeMap<Integer, String> count = new TreeMap<>();
+//        for (Map.Entry<String, Integer> e : map.entrySet()){
+//            count.put(e.getValue(), e.getKey());
+//        }
+//        count.lastEntry().getValue();
         return s;
     }
 
@@ -74,7 +82,6 @@ List<String> list = new ArrayList<>(List.of("apple", "banana", "apple", "orange"
         for (String s : strings){
             Set<Character> set = new TreeSet<>();
             char[] chars = s.toCharArray();
-            Arrays.sort(chars);
             for (char c:chars){
                 set.add(c);
             }
