@@ -4,6 +4,7 @@ import org.example.lesson14.Emp;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class HomeWork {
@@ -32,6 +33,13 @@ public class HomeWork {
                         .orElse("")
         );
 
+        System.out.println(
+                emps.stream()
+                        .map(e -> e.getName())
+                        .map(name -> name.split(" ")[0])
+                        .collect(Collectors.joining(", "))
+        );
+
 
 
 //        Найдите профессию самого старшего из тех работников, кому менее чем 40 лет
@@ -43,6 +51,24 @@ public class HomeWork {
                         .limit(1)
                         .map(emp -> emp.getPosition())
                         .toList()
+
+        );
+
+        System.out.println(
+                emps.stream()
+                        .filter(emp -> emp.getAge() < 40)
+                        .max(Comparator.comparingInt(Emp::getAge))
+                        .map(e -> e.getPosition())
+                        .orElse(null)
+
+        );
+
+        System.out.println(
+                emps.stream()
+                        .filter(emp -> emp.getAge() < 40)
+                        .collect(Collectors.maxBy(Comparator.comparingInt(Emp::getAge)))
+                        .map(e -> e.getPosition())
+                        .orElse(null)
 
         );
 

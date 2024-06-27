@@ -107,10 +107,10 @@ public class HomeWork {
         System.out.println(
                 emps.stream()
                         .flatMap(emp1 -> emps.stream().map(emp2 -> new AbstractMap.SimpleEntry<>(emp1, emp2)))
-                        .filter(pair -> !pair.getKey().equals(pair.getValue()))
-                        .max(Comparator.comparingInt(pair -> Math.abs(pair.getKey().getAge() - pair.getValue().getAge())))
-                        .map(pair -> "Pair with max age difference: " + pair.getKey() + " and " + pair.getValue())
-                        .orElse("No pairs found")
+//                        .filter(pair -> !pair.getKey().equals(pair.getValue()))
+                        .max(Comparator.comparingInt(pair -> pair.getKey().getAge() - pair.getValue().getAge()))
+//                        .map(pair -> "Pair with max age difference: " + pair.getKey() + " and " + pair.getValue())
+                        .orElse(null)
         );
     }
 }
