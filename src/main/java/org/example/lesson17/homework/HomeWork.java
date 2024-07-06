@@ -5,7 +5,9 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class HomeWork {
     public static void main(String[] args) {
@@ -27,13 +29,13 @@ public class HomeWork {
         uniqueWordsLines("homework17.txt");
     }
 
-    public static void uniqueWordsLines(String filename) {
+    public static void uniqueWords(String filename) {
 
         try (Reader reader = new FileReader(filename);
              BufferedReader bufferedReader = new BufferedReader(reader)) {
 
             LinkedHashSet<String> set = bufferedReader.lines()
-                    .flatMap(line -> Arrays.stream(line.split(" ")))
+                    .flatMap(line -> Arrays.stream(line.split("\\s+")))
                     .collect(Collectors.toCollection(LinkedHashSet::new));
 
             List<String> list = new ArrayList<>(set);
@@ -47,22 +49,44 @@ public class HomeWork {
         }
     }
 
-    public static void uniqueWords(String filename) {
+    public static void uniqueWordsLines(String filename) {
         try (Reader reader = new FileReader(filename);
              BufferedReader bufferedReader = new BufferedReader(reader)) {
 
-            Map<String, List<Integer>> wordLinesMap = new LinkedHashMap<>();
-            String line;
-            int lineNumber = 0;
+//            Map<String, List<Integer>> wordLinesMap = new LinkedHashMap<>();
+//            String line;
+//            int lineNumber = 0;
+//
+//            while ((line = bufferedReader.readLine()) != null) {
+//                String[] words = line.split(" ");
+//                for (String word : words) {
+//                    wordLinesMap.computeIfAbsent(word, k -> new ArrayList<>()).add(lineNumber);
+//                }
+//                lineNumber++;
+//            }
+//            System.out.println(wordLinesMap);
 
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] words = line.split(" ");
-                for (String word : words) {
-                    wordLinesMap.computeIfAbsent(word, k -> new ArrayList<>()).add(lineNumber);
-                }
-                lineNumber++;
-            }
-            System.out.println(wordLinesMap);
+            List<String> lines = bufferedReader.lines().toList(); // строки файла
+
+            Map<String, List<Integer>> map =
+                    IntStream.range(0, lines.size())
+                    .mapToObj(i -> i)
+                    .flatMap(i -> Arrays.stream(lines.get(i).split("\\s+")).map(
+                                    w -> new AbstractMap.SimpleEntry<>(w, i)
+                            )
+                    ) // SimpleEntry<слово, номер строки>
+                    .collect(
+                            Collectors.groupingBy(
+                                    pair -> pair.getKey(),
+                                    LinkedHashMap::new,
+                                    Collectors.mapping(
+                                            pair -> pair.getValue(),
+                                            Collectors.toList()
+                                    )
+                            )
+                    ) // LinkedHashMap<слово, List<номер строки>>
+            ;
+            System.out.println(map);
 
         } catch (Exception e){
             System.out.println(e);

@@ -3,6 +3,7 @@ package org.example.lesson16.homework;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.Reader;
+import java.util.Arrays;
 
 public class HomeWork {
     public static void main(String[] args) {
@@ -28,11 +29,13 @@ public class HomeWork {
         try (Reader reader = new FileReader(fileName);
              BufferedReader bufferedReader = new BufferedReader(reader)) {
 
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                count++;
-                line = bufferedReader.readLine();
-            }
+//            String line = bufferedReader.readLine();
+//            while (line != null) {
+//                count++;
+//                line = bufferedReader.readLine();
+//            }
+
+            count = (int) bufferedReader.lines().count();
 
         } catch (Exception e) {
             System.out.println(e);
@@ -46,13 +49,15 @@ public class HomeWork {
         try (Reader reader = new FileReader(fileName);
              BufferedReader bufferedReader = new BufferedReader(reader)) {
 
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                if (line.contains(pattern)) {
-                    count++;
-                }
-                line = bufferedReader.readLine();
-            }
+//            String line = bufferedReader.readLine();
+//            while (line != null) {
+//                if (line.contains(pattern)) {
+//                    count++;
+//                }
+//                line = bufferedReader.readLine();
+//            }
+
+            count = (int) bufferedReader.lines().filter(s -> s.contains(pattern)).count();
 
         } catch (Exception e) {
             System.out.println(e);
@@ -67,13 +72,17 @@ public class HomeWork {
                 BufferedReader bufferedReader = new BufferedReader(reader);
         ) {
 
-            String line = bufferedReader.readLine();
+//            String line = bufferedReader.readLine();
+//
+//            while (line != null) {
+//                String[] words = line.split(" ");
+//                count += words.length;
+//                line = bufferedReader.readLine();
+//            }
 
-            while (line != null) {
-                String[] words = line.split(" ");
-                count += words.length;
-                line = bufferedReader.readLine();
-            }
+            count = (int) bufferedReader.lines()
+                    .flatMap(s -> Arrays.stream(s.split(" ")))
+                    .count();
 
         } catch (Exception e) {
             System.out.println(e);
