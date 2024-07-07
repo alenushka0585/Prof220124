@@ -3,17 +3,17 @@ package org.example.lesson5.implementation;
 import java.util.Iterator;
 
 //интефейс ArrayList для хранения целых
-public interface MyList  extends Iterable<Integer>{
+public interface MyList <T>  extends Iterable<T>{
 
 //    https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html
     int size();
-    boolean contains (int value);
-    void set(int index, int value);
-    void add(int value);
-    void add(int index, int value);
+    boolean contains (T value);
+    void set(int index, T value);
+    void add(T value);
+    void add(int index, T value);
     void remove(int index);
-    int get(int index);
+    T get(int index);
 
-    Iterator<Integer> iterator();
-    Iterator<Integer> backward();
+    Iterator<T> iterator();
+    Iterator<T> backward();
 }

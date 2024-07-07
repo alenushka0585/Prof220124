@@ -6,16 +6,16 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.ListIterator;
 
-public class MyArrayList implements MyList {
+public class MyArrayList<T> implements MyList <T>, Comparable<T> {
     // количество элементов;
     private int size = 0;
     //    массив для хранения
-    private int[] data;
+    private T[] data;
     //    начальный размер массива
     private static final int INITIAL_CAPACITY = 4;
 
     public MyArrayList() {
-        data = new int[INITIAL_CAPACITY];
+        data = (T[]) new Object [INITIAL_CAPACITY];
     }
 
     @Override
@@ -24,7 +24,7 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public boolean contains(int value) {
+    public boolean contains(T value) {
         for (int i = 0; i < size(); i++) {
             if (value == data[i]) {
                 return true;
@@ -36,7 +36,7 @@ public class MyArrayList implements MyList {
     //изменение элемента по индексу
 
     @Override
-    public void set(int index, int value) {
+    public void set(int index, T value) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
@@ -44,7 +44,7 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public void add(int value) {
+    public void add(T value) {
         if (size == data.length) {
             increaseCapacity();
         }
@@ -53,7 +53,7 @@ public class MyArrayList implements MyList {
     }
 
     private void increaseCapacity() {
-        int[] newData = new int[data.length * 2];
+        T[] newData = (T[]) new Object[data.length * 2];
         for (int i = 0; i < data.length; i++) {
             newData[i] = data[i];
         }
@@ -74,7 +74,7 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public void add(int index, int value) {
+    public void add(int index, T value) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
@@ -102,7 +102,7 @@ public class MyArrayList implements MyList {
 
 
     @Override
-    public int get(int index) {
+    public T get(int index) {
         if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException();
         }
@@ -110,8 +110,8 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public Iterator<Integer> iterator() {
-        return new Iterator<Integer>() {
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
             // индекс элемента из MyArrayList который мы обходим
             private int position = -1;
 
@@ -122,7 +122,7 @@ public class MyArrayList implements MyList {
             }
 
             @Override
-            public Integer next() {
+            public T next() {
                 // должна возвращать текущий элемент MyArrayList
                 return get(position);
             }
@@ -135,8 +135,8 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public Iterator<Integer> backward() {
-        return new Iterator<Integer>() {
+    public Iterator<T> backward() {
+        return new Iterator<T>() {
             // индекс элемента из MyArrayList который мы обходим
             private int position = size();
 
@@ -147,37 +147,37 @@ public class MyArrayList implements MyList {
             }
 
             @Override
-            public Integer next() {
+            public T next() {
                 // должна возвращать текущий элемент MyArrayList
                 return get(position);
             }
         };
     }
 
-    public void sort() {
-        int n = size();
-        boolean swapped;
-        for (int i = 0; i < n - 1; i++) {
-            swapped = false;
-            for (int j = 0; j < n - i - 1; j++) {
-                if (data[j] > data[j + 1]) {
-                    // Обмен arr[j] и arr[j+1]
-                    int temp = data[j];
-                    data[j] = data[j + 1];
-                    data[j + 1] = temp;
-                    swapped = true;
-                }
-            }
-            if (!swapped) break; // Если элементы уже отсортированы
-        }
-    }
+//    public void sort() {
+//        int n = size();
+//        boolean swapped;
+//        for (int i = 0; i < n - 1; i++) {
+//            swapped = false;
+//            for (int j = 0; j < n - i - 1; j++) {
+//                if (data[j] > data[j + 1]) {
+//                    // Обмен arr[j] и arr[j+1]
+//                    T temp = data[j];
+//                    data[j] = data[j + 1];
+//                    data[j + 1] = temp;
+//                    swapped = true;
+//                }
+//            }
+//            if (!swapped) break; // Если элементы уже отсортированы
+//        }
+//    }
 
-    public Iterator<Integer> sortedIterator() {
-        int[] source = new int[size()];
+    public Iterator<T> sortedIterator() {
+        T[] source = (T[]) new Object[size()];
         System.arraycopy(data, 0, source, 0, size());
         Arrays.sort(source);
 
-        return new Iterator<Integer>() {
+        return new Iterator<T>() {
 
             private int position = -1;
 
@@ -188,15 +188,15 @@ public class MyArrayList implements MyList {
             }
 
             @Override
-            public Integer next() {
+            public T next() {
                 // должна возвращать текущий элемент MyArrayList
                 return source[position];
             }
         };
     }
 
-    public ListIterator<Integer> listIterator() {
-        return new ListIterator<Integer>() {
+    public ListIterator<T> listIterator() {
+        return new ListIterator<T>() {
             // индекс элемента из MyArrayList который мы обходим
             private int position = -1;
 
@@ -207,7 +207,7 @@ public class MyArrayList implements MyList {
             }
 
             @Override
-            public Integer next() {
+            public T next() {
                 // должна возвращать текущий элемент MyArrayList
                 return get(position);
             }
@@ -218,7 +218,7 @@ public class MyArrayList implements MyList {
             }
 
             @Override
-            public Integer previous() {
+            public T previous() {
                 return get(position);
             }
 
@@ -238,15 +238,20 @@ public class MyArrayList implements MyList {
             }
 
             @Override
-            public void set(Integer integer) {
+            public void set(T integer) {
                 MyArrayList.this.set(position, integer);
             }
 
             @Override
-            public void add(Integer integer) {
+            public void add(T integer) {
                 MyArrayList.this.add(integer);
             }
 
         };
+    }
+
+    @Override
+    public int compareTo(T o) {
+        return 0;
     }
 }
