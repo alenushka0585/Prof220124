@@ -26,7 +26,7 @@ public class MyArrayList<T> implements MyList <T>, Comparable<T> {
     @Override
     public boolean contains(T value) {
         for (int i = 0; i < size(); i++) {
-            if (value == data[i]) {
+            if (value.equals(data[i])) {
                 return true;
             }
         }

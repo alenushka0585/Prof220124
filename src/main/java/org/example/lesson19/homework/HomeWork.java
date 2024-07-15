@@ -1,5 +1,7 @@
 package org.example.lesson19.homework;
 
+import org.example.lesson19.Pair;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,17 +36,24 @@ public class HomeWork {
     }
 
     public static <T> T getMax(T[] arr, Comparator<T> comp){
-        if (arr == null || arr.length == 0) {
-            throw new IllegalArgumentException("Array must not be null or empty");
-        }
+//        if (arr == null || arr.length == 0) {
+//            throw new IllegalArgumentException("Array must not be null or empty");
+//        }
 
-        T max = arr[0];
-        for (T element : arr) {
-            if (comp.compare(element, max) > 0) {
-                max = element;
-            }
-        }
+//        T max = arr[0];
+//        for (T element : arr) {
+//            if (comp.compare(element, max) > 0) {
+//                max = element;
+//            }
+//        }
 
-        return max;
+        return Arrays.stream(arr)
+                .max(comp)
+                .orElse(null);
+
+    }
+
+    public static <K,V> boolean equals(Pair<K,V> p1, Pair<K,V> p2) {
+        return p1.first().equals(p2.first()) && p2.second().equals(p2.second());
     }
 }

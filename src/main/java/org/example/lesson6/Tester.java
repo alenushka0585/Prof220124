@@ -103,9 +103,9 @@ public class Tester {
             System.out.println("capital: " + c);
         }
 // чтобы работал for each, нужно чтобы extendiл Iterable
-        for (Integer i: myList){
-            System.out.println("myList element: " + i);
-        }
+//        for (Integer i: myList){
+//            System.out.println("myList element: " + i);
+//        }
 
         List<String> names = new ArrayList<>(
                 List.of("Max", "Alina", "Alexander", "Sam")

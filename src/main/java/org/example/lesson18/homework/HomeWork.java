@@ -10,7 +10,7 @@ public class HomeWork {
         //    Разбейте ее по резделителям (;|) и распечатайте составные части
 
         String s1 = "michael;levanov|34|34000";
-        System.out.println(Arrays.toString(s1.split(";|\\|")));
+        System.out.println(Arrays.toString(s1.split("[;|]")));
 
         //    2. В строке "Today's temperature is 18 degrees centigrade, yesterday it was 14"
         //    Замените все чиcла на 21 и замените centi на multi
@@ -53,19 +53,9 @@ public class HomeWork {
 //    В методе можно написать несколько проверок
 
     public static boolean isGoodPassword(String password) {
-        if (password.length() < 8) {
+        if(password == null || password.length() < 8)
             return false;
-        }
-
-        if (!password.matches(".*\\d.*")) {
-            return false;
-        }
-
-        if (!password.matches(".*[!@%#^&$|].*")) {
-            return false;
-        }
-
-        return true;
+        return password.matches(".*[0-9].*") && password.matches("[!@%#^&$|]");
     }
 
 //    4. Напишите метод isDate(String) который проверит, что передаваемая строка является датой
