@@ -3,11 +3,11 @@ package org.example.lesson7;
 import org.example.lesson5.implementation.MyList;
 
 public interface MyLinkedList<T> extends MyList <T> {
-    int removeFirst();
+    T removeFirst();
     void addFirst(T i);
-    int getFirst();
+    T getFirst();
 
-    int removeLast();
+    T removeLast();
     void addLast(T i);
-    int getLast();
+    T getLast();
 }

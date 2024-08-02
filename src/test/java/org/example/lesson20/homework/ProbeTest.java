@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ProbeTest {
+public class  ProbeTest {
 
 //    1. Напишите тест который проверит что в
 //    List odds = List.of(22, 12, 6);
