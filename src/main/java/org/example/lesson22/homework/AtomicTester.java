@@ -1,6 +1,7 @@
 package org.example.lesson22.homework;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 public class AtomicTester {
 //    3. Создайте класс AtomicTester
@@ -12,10 +13,14 @@ public class AtomicTester {
 //    распечатайте значение counter
     private static AtomicInteger counter = new AtomicInteger(10);
 
+
     private static void decrease5(AtomicInteger atomicInt){
         for (int i = 0; i < 5; i++) {
             atomicInt.decrementAndGet();
         }
+
+//        IntStream.range(0, 5)
+//                .forEach(i -> atomicInt.decrementAndGet());
     }
 
     public static void main(String[] args) {
@@ -31,6 +36,6 @@ public class AtomicTester {
             throw new RuntimeException(e);
         }
 
-        System.out.println(counter);
+        System.out.println(counter.get());
     }
 }
