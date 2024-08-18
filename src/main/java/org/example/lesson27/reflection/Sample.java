@@ -2,7 +2,6 @@ package org.example.lesson27.reflection;
 
 import org.example.lesson27.annotation.Call;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public class Sample {
